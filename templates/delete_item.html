@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete an item</title>
+    <H2>Remove Item</H2>
+</head>
+<body>
+
+    <a href="/"><h2>Home</h2></a>
+
+    <form action="/remove_item" method="POST">
+        <label for="item">Item:</label>
+        <select name="item" id="item">
+          {% for item in items %}
+            <option value="{{item[1]}}">{{item[1]}}</option>
+          {% endfor %}
+        </select> <br> <br>
+        <input type="submit" value="Remove" />
+
+        {% block content %}
+        <p>{{ msg }}</p>
+        {% endblock %}
+
+      </form>
+</body>
+</html>

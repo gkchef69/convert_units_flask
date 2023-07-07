@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+<style>
+  input::-webkit-outer-spin-button, 
+  input::-webkit-inner-spin-button {
+      display: none;
+  }
+</style>
+  </head>
+  <body>
+    <a href="/"><h2>Home</h2></a>
+    <h1>Convert</h1>
+    <br />
+    <form action="/convert" method="POST">
+      <label for="amount" type="number" >Amount</label>
+      <input class="amount" type="number" required min="0" step="any" name="amount" id="amount" />
+      <br />
+      <label for="from">From</label>
+      <select name="from" id="from">
+        <option value="kg">Kg</option>
+        <option value="cups">Cups</option>
+        <option value="gram">Grams</option>
+        <option value="liter">Liters</option>
+        <option value="oz">Oz</option>
+        <option value="tbsp">Tbsp</option>
+        <option value="tsp">Tsp</option>
+
+      </select>
+      <br />
+      <label for="to">To</label>
+      <select name="to" id="to">
+        <option value="kg">Kg</option>
+        <option value="cups">Cups</option>
+        <option value="gram">Grams</option>
+        <option value="liter">Liters</option>
+        <option value="oz">Oz</option>
+        <option value="tbsp">Tbsp</option>
+        <option value="tsp">Tsp</option>
+      </select>
+      <br />
+      <label for="item">Item:</label>
+      <select name="item" id="item">
+        {% for item in items %}
+            <option value="{{item[0]}}">{{item[0]}}</option>
+        {% endfor %}
+      </select>
+      <input type="submit" value="Convert" />
+      <br><br>
+      {% block content %}
+      {% if req_method == "POST": %}
+      <div>
+        
+        <button type="text"> {{ item  }}</button> <p> <span> <input type="text" value="{{ res_1 }} {{ item  }}" readonly></span> &nbsp; <span> {{sep}} </span> &nbsp; <span><input type="text" value="{{ res_2 }}" readonly ></span></p>
+    
+      </div>
+      {% endif %}
+      {% endblock %}
+
+      
+
+
+      
+  </body>
+</html>

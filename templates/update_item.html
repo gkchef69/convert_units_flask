@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PARAPAPAP</title>
+    <h2>Update Item</h2>
+</head>
+
+<body>
+
+
+    {% block content %}
+    <form action="update_item" method="POST">
+
+
+        <label for="name">NAME:</label><br>
+        <input type="text" value="{{stuff['name']}}" name="name" id="name" required>
+        <input type="text" value="{{stuff['id']}}" name="id" id="id">
+        <!-- <input type="button" value="Edit Name" ><br>  -->
+        <br>
+        <label for="kg">KG:</label><br>
+        <input type="number" value="{{stuff['kg']}}" min="0" step="any" name="kg" id="kg" required><br>
+
+        <label for="oz">OZ:</label><br>
+        <input type="number" value="{{stuff['grams']}}" min="0" step="any" name="oz" id="oz" required><br>
+
+        <label for="gram">GRAMS:</label><br>
+        <input type="number" value="{{stuff['cups']}}" min="0" step="any" name="grams" id="gram" required><br>
+
+        <label for="cups">CUPS:</label><br>
+        <input type="number" value="{{stuff['liters']}}" min="0" step="any" name="cups" id="cups" required><br>
+
+        <label for="liters">LITERS:</label><br>
+        <input type="number" value="{{stuff['oz']}}" min="0" step="any" name="liters" id="liters" required><br>
+
+        <label for="tbsp">TBSP:</label><br>
+        <input type="number" value="{{stuff['tbsp']}}" min="0" step="any" name="tbsp" id="tbsp" required><br>
+
+        <label for="tsp">TSP:</label><br>
+        <input type="number" value="{{stuff['tsp']}}" min="0" step="any" name="tsp" id="tsp" required><br>
+
+        <input type="submit" value="UPDATE" id="">
+
+        <p>{{ msg }}</p>
+
+
+    </form>
+    {% endblock %}
+
+</body>
+
+</html>

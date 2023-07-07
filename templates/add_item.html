@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Item</title>
+    <h2>ADD AN ITEM</H2>
+</head>
+
+<style>
+    /*
+    input::-webkit-outer-spin-button, 
+    input::-webkit-inner-spin-button {
+        display: none;
+    }*/
+</style>
+
+<body>
+    <a href="/"><h2>Home</h2></a>
+
+    <form action="/add_item" method="post">
+
+      
+        <label for="name">NAME:</label><br>
+        <input type="text" name="name" id="name" required><br>
+
+        <label for="kg">KG:</label><br>
+        <input type="number" value="1" min="0" step="any" name="kg" id="kg" required readonly><br>
+
+        <label for="oz">OZ:</label><br>
+        <input type="number" value="35.274" min="0" step="any"  name="oz" id="oz" required readonly><br>
+
+        <label for="gram">GRAMS:</label><br>
+        <input type="number" value="1000" min="0" step="any"  name="grams" id="gram" required readonly><br>
+
+        <label for="cups">CUPS:</label><br>
+        <input type="number" min="0" step="any"  name="cups" id="cups" required><br>
+
+        <label for="liters">LITERS:</label><br>
+        <input type="number" min="0" step="any"  name="liters" id="liters" required><br>
+
+        <label for="tbsp">TBSP:</label><br>
+        <input type="number" min="0" step="any"  name="tbsp" id="tbsp" required><br>
+
+        <label for="tsp">TSP:</label><br>
+        <input type="number" min="0" step="any"  name="tsp" id="tsp" required><br>
+
+        <input type="submit" value="Add"/>
+
+        {% block content %}
+        <p>{{ msg }}</p>
+        {% endblock %}
+
+    </form>
+
+</body>
+</html>
