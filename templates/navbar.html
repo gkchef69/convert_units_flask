@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Nav Bar</title>
+    <!-- Basic Metas -->
+  <!-- <meta charset="UTF-8">
+  <title>Responsive Nav Example</title>
+  <meta name="description" content="Sample of Responsive Nav for website.">
+  <meta name="author" content="Jason Sutton"> -->
+
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- jQuery Links -->
+  <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+  <!-- Styles -->
+    <!-- <link rel="stylesheet" type="text/css" href="nav.css"> -->
+
+  <!-- Font Awesome Link -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+        integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,500,800" rel="stylesheet"><link rel="stylesheet" href="../static/navbar_style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<header>
+    <div class="container">
+
+        <h1 class="logo">
+            <span id="logo-first">Giorgos </span>
+            <span id="logo-midlle"> Junior</span>
+            <span id="logo-last"> Kafantaris</span>
+        </h1>
+
+        <!-- i elements are for font awesome icons home, info, briefcase, envelope -->
+        <nav class="site-nav">
+            <ul>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-home site-nav-icon"></i>Home</a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-info site-nav-icon"></i>About</a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-briefcase site-nav-icon"></i>Portfolio</a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-envelope site-nav-icon"></i>Contact</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Menu btn that toggles onClick and changes appearance ( .menu-toggle CSS ) -->
+        <div class="menu-toggle">
+            <div class="hamburger"></div>
+        </div>
+    </div>
+</header>
+<!-- partial -->
+  <script  src="../static/navbar_script.js"></script>
+
+</body>
+</html>

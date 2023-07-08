@@ -1,3 +1,5 @@
+{% include "./navbar.html" %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +12,7 @@
 
 <style>
     /*
-    input::-webkit-outer-spin-button, 
+    input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
         display: none;
     }*/
@@ -21,7 +23,7 @@
 
     <form action="/add_item" method="post">
 
-      
+
         <label for="name">NAME:</label><br>
         <input type="text" name="name" id="name" required><br>
 
