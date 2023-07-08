@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="" />
 <style>
-  input::-webkit-outer-spin-button, 
+  input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
       display: none;
   }
@@ -57,9 +57,9 @@
       {% block content %}
       {% if req_method == "POST": %}
       <div>
-        
-        <button type="text"> {{ item  }}</button> <p> <span> <input type="text" value="{{dict['amount']}}{{dict['fromwhat']}} {{dict['item']}}" readonly></span> &nbsp; <span> {{sep}} </span> &nbsp; <span><input type="text" value="{{dict['result']}}{{dict['towhat']}} {{dict['item']}}" readonly ></span></p>
-<!--     
+
+        <button type="text"> {{ item  }}</button> <p> <span> <input type="text" value="{{dict['amount']}}{{dict['fromwhat']}} {{dict['item']}}" readonly></span> &nbsp; <span> {{sep}} </span> &nbsp; <span><input type="text" value="{{dict['result']}} {{dict['towhat']}} {{dict['item']}}" readonly ></span></p>
+<!--
         <p>{{dict['amount']}}{{dict['fromwhat']}} {{dict['item']}} {{sep}} {{dict['result']}}{{dict['towhat']}} {{dict['item']}}</p>
         <p>aaaaaaaaaaaaaaaaaaaaa</p> -->
 
@@ -67,9 +67,9 @@
       {% endif %}
       {% endblock %}
 
-      
 
 
-      
+
+
   </body>
 </html>

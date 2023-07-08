@@ -103,7 +103,7 @@ def convert(quantity,item, fromwhat, towhat):
             fraction = ""
         elif string < 1:
             if towhat == "cups":
-                plus = ""
+                plus = "&"
                 first_part = ""
                 # print(f"{string}  einai22 {string}")
                 # print(type(string))
@@ -120,7 +120,7 @@ def convert(quantity,item, fromwhat, towhat):
             fraction = Fraction(string)
         print(type(first_part), fraction)
         # print(towhat)
-        return {'amount' : amount, "fromwhat" : fromwhat, "item" : item, "result" : str(int(value)) + " & " + str(fraction), "towhat" : towhat, "item" : item}
+        return {'amount' : amount, "fromwhat" : fromwhat, "item" : item, "result" : str(int(value)) + plus + str(fraction), "towhat" : towhat, "item" : item}
 
     return {'amount' : amount, "fromwhat" : fromwhat, "item" : item, "result" : f"{round(value, 3)}", "towhat" : towhat, "item" : item}
 
