@@ -58,8 +58,11 @@
       {% if req_method == "POST": %}
       <div>
         
-        <button type="text"> {{ item  }}</button> <p> <span> <input type="text" value="{{ res_1 }} {{ item  }}" readonly></span> &nbsp; <span> {{sep}} </span> &nbsp; <span><input type="text" value="{{ res_2 }}" readonly ></span></p>
-    
+        <button type="text"> {{ item  }}</button> <p> <span> <input type="text" value="{{dict['amount']}}{{dict['fromwhat']}} {{dict['item']}}" readonly></span> &nbsp; <span> {{sep}} </span> &nbsp; <span><input type="text" value="{{dict['result']}}{{dict['towhat']}} {{dict['item']}}" readonly ></span></p>
+<!--     
+        <p>{{dict['amount']}}{{dict['fromwhat']}} {{dict['item']}} {{sep}} {{dict['result']}}{{dict['towhat']}} {{dict['item']}}</p>
+        <p>aaaaaaaaaaaaaaaaaaaaa</p> -->
+
       </div>
       {% endif %}
       {% endblock %}

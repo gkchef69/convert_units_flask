@@ -1,43 +1,16 @@
 from fractions import Fraction
 import mysql.connector
+import db as dba
 
-db = mysql.connector.connect(
-    host="gkchef69.mysql.pythonanywhere-services.com",
-    user="gkchef69",
-    passwd="giorgos1711",
-    database="gkchef69$recipes",
-    autocommit=True,
-    port = 3306
-    )
-
-
-c =  db.cursor()
+db, c = dba.connect()
 
 def get_items():
-    db = mysql.connector.connect(
-    host="gkchef69.mysql.pythonanywhere-services.com",
-    user="gkchef69",
-    passwd="giorgos1711",
-    database="gkchef69$recipes",
-    autocommit=True,
-    port = 3306
-    )
-
-    cursor = db.cursor()
+    db, c = dba.connect()
     c.execute("SELECT `name` FROM items")
     return c.fetchall()
 
 def convert(quantity,item, fromwhat, towhat):
-    db = mysql.connector.connect(
-    host="gkchef69.mysql.pythonanywhere-services.com",
-    user="gkchef69",
-    passwd="giorgos1711",
-    database="gkchef69$recipes",
-    autocommit=True,
-    port = 3306
-    )
-
-    cursor = db.cursor()
+    db, c = dba.connect()
     sql = """SELECT * FROM `items` WHERE name = %s"""
 
     c.execute(sql,([item]))
@@ -145,8 +118,9 @@ def convert(quantity,item, fromwhat, towhat):
         else:
             plus = "&"
             fraction = Fraction(string)
+        print(type(first_part), fraction)
         # print(towhat)
-        return f"{amount} {fromwhat} {item} {first_part}{plus}{str(fraction)} {towhat}{item}"
+        return {'amount' : amount, "fromwhat" : fromwhat, "item" : item, "result" : str(int(value)) + " & " + str(fraction), "towhat" : towhat, "item" : item}
 
-    return f"{amount} {fromwhat} {item} {round(value, 3)} {item}"
+    return {'amount' : amount, "fromwhat" : fromwhat, "item" : item, "result" : f"{round(value, 3)}", "towhat" : towhat, "item" : item}
 
