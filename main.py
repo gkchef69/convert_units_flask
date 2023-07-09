@@ -5,33 +5,71 @@ import db as dba
 
 app = Flask(__name__)
 
+sesh = {'authenticated' : False}
+
 @app.route("/")
 def root():
-    return render_template('base.html')
+    db, cursor = dba.connect()
 
-AUTHENTICATED = False
+    # if not sesh["authenticated"]:
+
+    #     return redirect(url_for('login'))
+
+
+    return render_template('base.html', sesh = sesh)
+
+@app.route('/logout')
+def logout():
+
+    sesh["authenticated"] = False
+
+    return redirect(url_for('root'))
+
+
 
 @app.route("/login",methods=['GET','POST'])
-def add_recipe():
-    if request.method=='GET':
-        resp = make_response(render_template('login.html'))
-        return resp
-    else:
-        password = request.form['password']
-        if password=="lessgo":
-            resp = make_response(render_template('base.html'))
-            resp.set_cookie('pass', "lessgo")
-            return resp
-        else:
-            return "Incorrect password"
+def login():
+    db, cursor = dba.connect()
+
+
+    if request.method == 'POST':
+
+        sql  = 'SELECT * FROM `users`'
+        cursor.execute(sql)
+
+        for user in cursor.fetchall():
+
+            if user[1] == request.form.get('username') and user[2] == request.form.get('password'):
+
+                sesh["authenticated"] = True
+
+
+                return redirect(url_for('root'))
+
+
+    return render_template('login.html', sesh = sesh)
+
+
+    # if request.method=='GET':
+    #     resp = make_response(render_template('login.html'))
+    #     return resp
+    # else:
+    #     password = request.form['password']
+    #     if password=="lessgo":
+    #         resp = make_response(render_template('base.html'))
+    #         resp.set_cookie('pass', "lessgo")
+    #         return resp
+    #     else:
+    #         return "Incorrect password"
 
 @app.route("/convert",methods=['GET','POST'])
 def convert_web():
+
     db, cursor = dba.connect()
 
     items = convert.get_items()
     if request.method=='GET':
-        resp = make_response(render_template('convert.html',items=items, result="", res_1="", res_2="",sep="",item=""))
+        resp = make_response(render_template('convert.html',items=items, result="", res_1="", res_2="",sep="",item="", sesh = sesh))
         return resp
     if request.method=='POST':
 
@@ -79,7 +117,8 @@ def convert_web():
                 item=item,
                 req_method = request.method,
 
-                dict = afto
+                dict = afto,
+                sesh = sesh
         ))
         return resp
     # print(res_2)
@@ -87,6 +126,10 @@ def convert_web():
 
 @app.route("/add_item", methods=["GET", "POST"])
 def add_item_function():
+    if not sesh["authenticated"]:
+
+        return redirect(url_for('login'))
+
     db, cursor = dba.connect()
 
     write_to_db = True
@@ -94,7 +137,7 @@ def add_item_function():
     if request.method == "GET":
 
         done_msg = ""
-        return make_response(render_template("add_item.html",msg=done_msg))
+        return make_response(render_template("add_item.html",msg=done_msg, sesh = sesh))
 
     if request.method == "POST":
 
@@ -118,10 +161,14 @@ def add_item_function():
         except mysql.connector.errors.IntegrityError:
             done_msg = f"Εισαι πολυ ηλιθιος, το εχεις βαλει ηδη"
 
-        return make_response(render_template("add_item.html", msg=done_msg))
+        return make_response(render_template("add_item.html", msg=done_msg, sesh = sesh))
 
 @app.route("/remove_item", methods=["GET", "POST"])
 def remove_item():
+    if not sesh["authenticated"]:
+
+        return redirect(url_for('login'))
+
     db, cursor = dba.connect()
 
     done_msg = ""
@@ -131,7 +178,7 @@ def remove_item():
     print(items)
 
     if request.method == "GET":
-        resp = make_response(render_template("delete_item.html", msg =done_msg, items=items))
+        resp = make_response(render_template("delete_item.html", msg =done_msg, items=items, sesh = sesh))
         return resp
 
     if request.method == "POST":
@@ -147,12 +194,16 @@ def remove_item():
         db.commit()
 
         done_msg = f"Removed item from database '{item}'"
-        return make_response(render_template("delete_item.html", msg=done_msg, items = items))
+        return make_response(render_template("delete_item.html", msg=done_msg, items = items, sesh = sesh))
 
 items = {}
 
 @app.route("/search_item", methods=["GET", "POST"])
 def search_item():
+    if not sesh["authenticated"]:
+
+        return redirect(url_for('login'))
+
     db, cursor = dba.connect()
 
     if request.method=="GET":
@@ -160,7 +211,7 @@ def search_item():
         cursor.execute("SELECT * FROM items")
         item_list = cursor.fetchall()
         print(item_list)
-        return make_response(render_template("search_item.html", items=item_list))
+        return make_response(render_template("search_item.html", items=item_list, sesh = sesh))
 
 
     if request.method == "POST":
@@ -183,10 +234,15 @@ def search_item():
 
 @app.route("/update_item", methods=["GET", "POST"])
 def update_item():
+    if not sesh["authenticated"]:
+
+        return redirect(url_for('login'))
+
+
     db, cursor = dba.connect()
     if request.method == "GET":
         print("get")
-        return make_response(render_template("update_item.html", stuff = items))
+        return make_response(render_template("update_item.html", stuff = items, sesh = sesh))
 
 
     if request.method == "POST":
@@ -208,12 +264,14 @@ def update_item():
         val_insert = (id, name, kg, grams, cups, liter, oz, tbsp, tsp)
         val_delete = (id,)
 
-        delete_sql = "DELETE FROM  `items` WHERE `id` = %s"
+        delete_sql = "DELETE FROM `items` WHERE `id` = %s"
         cursor.execute(delete_sql, val_delete)
 
         insert_sql = "INSERT INTO `items` (`id`, `name`, `kg`, `grams`, `cups`, `liter`, `oz`, `tbsp`, `tsp`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
         cursor.execute(insert_sql, val_insert)
 
+
+        # cursor.execute(sql, val)
         db.commit()
 
         return redirect(url_for('search_item'))
@@ -247,3 +305,11 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS `items` (
     )
      """)
 
+cursor.execute("""CREATE TABLE IF NOT EXISTS `users` (
+    `id` INT(10) AUTO_INCREMENT PRIMARY KEY,
+    `username` VARCHAR(50) NOT NULL UNIQUE,
+    `password` VARCHAR(50) NOT NULL
+    )
+     """)
+
+# app.run(False)
