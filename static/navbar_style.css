@@ -4,7 +4,7 @@ html {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
   }
-  
+
   *,
   *:before,
   *:after {
@@ -20,7 +20,7 @@ html {
 body {
     margin: 0;
     padding:0;
-    background: #f2f2f2;
+    background: #111111;
     font-family: 'Montserrat', sans-serif;
     min-width: 198px;
 }
@@ -31,7 +31,7 @@ body {
 /*--------------------------------------*/
 
 .container {
-    width: 95%; 
+    width: 95%;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -105,6 +105,7 @@ header::after {
 
 .site-nav-open {
     height: auto;
+    z-index: 9999;
 }
 
 .site-nav ul {
@@ -137,14 +138,14 @@ header::after {
 
 /*--------------------------------------*/
 /*   ICON styling for smaller screens   */
-/*--------------------------------------*/ 
+/*--------------------------------------*/
 
 .site-nav-icon  {
     display: inline-block;   /* allows margin changes */
     font-size: 1.5em;
     margin-right: 1em;
     width: 1em;           /* width lines the icons up */
-    text-align: right;  
+    text-align: right;
     color: rgba(255, 255, 255, .35);  /* white with low opacity to make icons less bright */
 }
 
@@ -206,7 +207,7 @@ header::after {
 /* Before hamburger line is invisible   */
 /*--------------------------------------*/
 .open .hamburger::before {
-    opacity: 0;            
+    opacity: 0;
 }
 
 /*--------------------------------------*/
@@ -223,7 +224,7 @@ header::after {
 /*--------------------------------------*/
 /*    For Device (Screens > 700px )     */
 /*--------------------------------------*/
-@media (min-width:700px) {
+@media (min-width:870px) {
 
     .menu-toggle {       /* Removes hamburger menu */
         display: none;
